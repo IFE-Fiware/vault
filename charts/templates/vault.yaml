@@ -316,19 +316,6 @@ spec:
       {{- end }}
       {{- range .Values.agentList.providers }}
       - type: kv
-        path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-infra-adapter-simpl-backend"
-        data:
-          data:
-            "ENGINE_PATH": "/opt/plugins/hashicorp-vault-provider.so"
-            "HTTP_HOST": ""
-            "HTTP_IDLE_TIMEOUT": "120s"
-            "HTTP_PORT": "8080"
-            "HTTP_READ_TIMEOUT": "10s"
-            "HTTP_WRITE_TIMEOUT": "10s"
-            "LOG_ENCODING": "json"
-            "LOG_LEVEL": "debug"
-            "VAULT_ADRESS": "https://vault.{{ $.Values.cluster.namespace }}.{{ $.Values.domainSuffix }}"
-      - type: kv
         path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-contract"
         data:
           data:
@@ -350,18 +337,6 @@ spec:
             "spring.mail.password": "pass"
             "spring.mail.username": "user"
       - type: kv
-        path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-simpl-edc"
-        data:
-          data:
-            "contractmanager_apikey": "apikey"
-            "edc_datasource_default_password": "${ env `{{ . }}_edc` }"
-            "edc_datasource_policy_password": "${ env `{{ . }}_edc` }"
-            "edc_ionos_access_key": "accesskeystring"
-            "edc_ionos_endpoint": "s3-eu-central-1.ionoscloud.com"
-            "edc_ionos_endpoint_region": "de"
-            "edc_ionos_secret_key": "secretkeystring"
-            "edc_ionos_token": "tokenstring"
-      - type: kv
         path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-postgres-passwords"
         data:
           data:
@@ -369,6 +344,7 @@ spec:
             "{{ . }}-keycloak": "${ env `{{ . }}_keycloak` }"
             "{{ . }}-usersroles": "${ env `{{ . }}_usersroles` }"
             "{{ . }}-infrabe": "${ env `{{ . }}_infrabe` }"
+            "{{ . }}-edc": "${ env `{{ . }}_edc` }"
       - type: kv
         path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-keycloak"
         data:
@@ -392,24 +368,13 @@ spec:
             "KAFKA_CLIENT_PASSWORDS": "${ env `{{ . }}_contract_kafka_pass` }"
             "KAFKA_CLIENT_USER": "{{ . }}_contract"
       - type: kv
-        path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-simpl-edc"
-        data:
-          data:
-            "contractmanager_apikey": "apikey"
-            "edc_datasource_default_password": "${ env `{{ . }}_edc` }"
-            "edc_datasource_policy_password": "${ env `{{ . }}_edc` }"
-            "edc_ionos_access_key": "accesskeystring"
-            "edc_ionos_endpoint": "s3-eu-central-1.ionoscloud.com"
-            "edc_ionos_endpoint_region": "de"
-            "edc_ionos_secret_key": "secretkeystring"
-            "edc_ionos_token": "tokenstring"
-      - type: kv
         path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-postgres-passwords"
         data:
           data:
             "{{ . }}-authenticationprovider": "${ env `{{ . }}_authenticationprovider` }"
             "{{ . }}-keycloak": "${ env `{{ . }}_keycloak` }"
             "{{ . }}-usersroles": "${ env `{{ . }}_usersroles` }"
+            "{{ . }}-edc": "${ env `{{ . }}_edc` }"
       - type: kv
         path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-keycloak"
         data:
