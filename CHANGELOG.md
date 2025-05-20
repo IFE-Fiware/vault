@@ -1,3 +1,8 @@
+## 1.0.2 (2025-05-20)
+
+No changes.
+
+
 ## 1.0.2 (2025-05-16)
 
 Fix ingress and value configuration.
