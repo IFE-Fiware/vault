@@ -75,7 +75,7 @@ spec:
     spec:
       ingressClassName: nginx
       rules:
-        - host: vault.{{ .Values.cluster.namespace }}.{{ .Values.domainSuffix }}
+        - host: vault.{{ .Values.namespaceTag }}.{{ .Values.domainSuffix }}
           http:
             paths:
               - backend:
@@ -87,8 +87,8 @@ spec:
                 pathType: Prefix
       tls:
         - hosts:
-            - vault.{{ .Values.cluster.namespace }}.{{ .Values.domainSuffix }}
-          secretName: vault-{{ .Values.cluster.namespace }}-tls
+            - vault.{{ .Values.namespaceTag }}.{{ .Values.domainSuffix }}
+          secretName: vault-{{ .Values.namespaceTag }}-tls
 
   # In some cases, you have to set permissions for the raft directory.
   # For example in the case of using a local kind cluster, uncomment the lines below.
