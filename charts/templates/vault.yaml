@@ -75,7 +75,7 @@ spec:
     spec:
       ingressClassName: nginx
       rules:
-        - host: vault.{{ .Values.cluster.namespace }}.{{ .Values.domainSuffix }}
+        - host: vault.{{ .Values.namespaceTag }}.{{ .Values.domainSuffix }}
           http:
             paths:
               - backend:
