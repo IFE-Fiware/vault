@@ -1,5 +1,10 @@
 ## 1.1.2 (2025-06-03)
 
+No changes.
+
+
+## 1.1.2 (2025-06-03)
+
 Workaround for Contract-consumption-be.
 
 ## 1.1.1 (2025-06-03)
