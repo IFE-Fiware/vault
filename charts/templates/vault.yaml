@@ -75,7 +75,7 @@ spec:
     spec:
       ingressClassName: nginx
       rules:
-        - host: vault.{{ .Values.namespaceTag }}.{{ .Values.domainSuffix }}
+        - host: vault.{{ .Values.cluster.namespace }}.{{ .Values.domainSuffix }}
           http:
             paths:
               - backend:
@@ -87,8 +87,8 @@ spec:
                 pathType: Prefix
       tls:
         - hosts:
-            - vault.{{ .Values.namespaceTag }}.{{ .Values.domainSuffix }}
-          secretName: vault-{{ .Values.namespaceTag }}-tls
+            - vault.{{ .Values.cluster.namespace }}.{{ .Values.domainSuffix }}
+          secretName: vault-{{ .Values.cluster.namespace }}-tls
 
   # In some cases, you have to set permissions for the raft directory.
   # For example in the case of using a local kind cluster, uncomment the lines below.
@@ -193,7 +193,7 @@ spec:
           # Allow every pod in the default namespace to use the secret kv store
           - name: "{{ .Values.hashicorp.role }}"
             bound_service_account_names: ["*-sa","*-service-account","*-svc-account",'*{{ regexReplaceAll "^.*(.)$" .Values.cluster.namespace "${1}" }}',"default","keycloak"]
-            bound_service_account_namespaces: ['*{{ regexReplaceAll "^.*(.)$" .Values.cluster.namespace "${1}" }}']
+            bound_service_account_namespaces: [{{ range $index, $item := (concat .Values.agentList.authorities .Values.agentList.providers .Values.agentList.consumers (list .Values.cluster.namespace)) }}{{if $index}},{{end}}"{{ $item }}"{{ end }}]
             policies: "{{ .Values.hashicorp.secretEngine }}-policy"
             ttl: 1h
 
@@ -233,6 +233,7 @@ spec:
             "{{ . }}_authprovider": "${ env `{{ . }}_authprovider_kafka_pass` }"
             "{{ . }}_usersroles": "${ env `{{ . }}_usersroles_kafka_pass` }"
             "{{ . }}_contract": "${ env `{{ . }}_contract_kafka_pass` }"
+            "{{ . }}_contract_consumption": "${ env `{{ . }}_contract_consumption_kafka_pass` }"
             "{{ . }}_tier2gw": "${ env `{{ . }}_tier2gw_kafka_pass` }"
             {{- end }}
             {{- range $key, $value := .Values.kafkaCredentials }}
@@ -287,11 +288,17 @@ spec:
             "SPRING_DATASOURCE_PASSWORD": "${ env `{{ . }}_fcservice` }"
             "SPRING_DATASOURCE_URL": "jdbc:postgresql://pg-cluster.{{ $.Values.cluster.namespace }}.svc.cluster.local:5432/{{ . }}_fcservice"
             "SPRING_DATASOURCE_USERNAME": "{{ . }}_fcservice"
+            "OTEL_EXPORTER_OTLP_ENDPOINT": "http://collector.{{ $.Values.cluster.namespace }}.{{ $.Values.domainSuffix }}"
+            "OTEL_RESOURCE_ATTRIBUTES_DEPLOYMENT_ENVIRONMENT": "{{ $.Values.domainSuffix }}"
+            "OTEL_SDK_DISABLED": "false"
       - type: kv
         path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-adapter-simpl-backend"
         data:
           data:
             "FEDERATED_CATALOOGUE_CLIENT_URL": "https://xsfc-server-service.{{ . }}.{{ $.Values.domainSuffix }}"
+            "OTEL_EXPORTER_OTLP_ENDPOINT": "http://collector.{{ $.Values.cluster.namespace }}.{{ $.Values.domainSuffix }}"
+            "OTEL_RESOURCE_ATTRIBUTES_DEPLOYMENT_ENVIRONMENT": "{{ $.Values.domainSuffix }}"
+            "OTEL_SDK_DISABLED": "false"
       - type: kv
         path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-postgres-passwords"
         data:
@@ -367,6 +374,12 @@ spec:
             "DB_USER": "{{ . }}_contract"
             "KAFKA_CLIENT_PASSWORDS": "${ env `{{ . }}_contract_kafka_pass` }"
             "KAFKA_CLIENT_USER": "{{ . }}_contract"
+      - type: kv
+        path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-contract-consumption-be"
+        data:
+          data:
+            "KAFKA_AUTH_SASL_PASSWORD": "${ env `{{ . }}_contract_consumption_kafka_pass` }"
+            "KAFKA_AUTH_SASL_USERNAME": "{{ . }}_contract_consumption" 
       - type: kv
         path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-postgres-passwords"
         data:
@@ -611,6 +624,11 @@ spec:
         secretKeyRef:
           name: "kafka-users-secret"
           key: "{{ . }}_contract"
+    - name: "{{ . }}_contract_consumption_kafka_pass"
+      valueFrom:
+        secretKeyRef:
+          name: "kafka-users-secret"
+          key: "{{ . }}_contract_consumption" 
     - name: "{{ . }}_tier2gw_kafka_pass"
       valueFrom:
         secretKeyRef:
