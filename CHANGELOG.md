@@ -1,5 +1,10 @@
 ## 1.1.1 (2025-06-03)
 
+No changes.
+
+
+## 1.1.1 (2025-06-03)
+
 Restored namespaceTag value.
 
 ## 1.1.0 (2025-06-03)
