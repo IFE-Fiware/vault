@@ -192,7 +192,7 @@ spec:
         roles:
           # Allow every pod in the default namespace to use the secret kv store
           - name: "{{ .Values.hashicorp.role }}"
-            bound_service_account_names: ["*-sa","*-service-account","*-svc-account",'*{{ regexReplaceAll "^.*(.)$" .Values.cluster.namespace "${1}" }}',"default","keycloak"]
+            bound_service_account_names: ["*-sa","*-service-account","*-consumption-be","*-svc-account",'*{{ regexReplaceAll "^.*(.)$" .Values.cluster.namespace "${1}" }}',"default","keycloak"]
             bound_service_account_namespaces: [{{ range $index, $item := (concat .Values.agentList.authorities .Values.agentList.providers .Values.agentList.consumers (list .Values.cluster.namespace)) }}{{if $index}},{{end}}"{{ $item }}"{{ end }}]
             policies: "{{ .Values.hashicorp.secretEngine }}-policy"
             ttl: 1h

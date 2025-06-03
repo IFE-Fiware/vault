@@ -1,7 +1,15 @@
+## 1.1.2 (2025-06-03)
+
+Workaround for Contract-consumption-be.
+
 ## 1.1.1 (2025-06-03)
 
-No changes.
+Restored namespaceTag value.
 
+## 1.1.0 (2025-06-03)
+
+Added additional secrets and additional data in existing secrets.
+Fixed bound namespaces entry based on agent list.
 
 ## 1.1.1 (2025-06-03)
 
