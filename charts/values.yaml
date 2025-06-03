@@ -1,8 +1,5 @@
 cluster:
   namespace: common
-  issuer: clusterissuer
-
-namespaceTag: common
 
 image:
   repository: hashicorp/vault
