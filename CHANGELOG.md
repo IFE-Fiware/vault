@@ -1,16 +1,11 @@
-## 1.0.2 (2025-05-20)
+## 1.1.0 (2025-06-03)
 
-No changes.
-
+Added additional secrets and additional data in existing secrets.
+Fixed bound namespaces entry based on agent list.
 
 ## 1.0.2 (2025-05-16)
 
 Fix ingress and value configuration.
-
-## 1.0.1 (2025-05-13)
-
-No changes.
-
 
 ## 1.0.1 (2025-05-13)
 
