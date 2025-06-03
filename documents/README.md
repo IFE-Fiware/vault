@@ -28,7 +28,6 @@ Mentionable values:
 | Variable name                 |     Example         | Description     |
 | ----------------------        |     :-----:         | --------------- |
 | cluster.namespace             | common      | namespace of deployment  |
-| namespaceTag                  | common      | namespace tag in domain name |
 | image.repository              | hashicorp/vault     | image repo  |
 | image.tag                     | 1.19.0 | image tag |
 | replicasCount                 | 3 | enables autocreation of topics |
