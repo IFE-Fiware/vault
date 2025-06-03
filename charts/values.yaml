@@ -1,6 +1,8 @@
 cluster:
   namespace: common
 
+namespaceTag: common
+
 image:
   repository: hashicorp/vault
   tag: 1.19.0
