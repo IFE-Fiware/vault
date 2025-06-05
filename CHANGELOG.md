@@ -1,7 +1,6 @@
-## 1.1.2 (2025-06-03)
+## 1.1.3 (2025-06-05)
 
-No changes.
-
+Removed the infrastructure-be secret from automation.
 
 ## 1.1.2 (2025-06-03)
 
