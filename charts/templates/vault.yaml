@@ -333,17 +333,6 @@ spec:
             "KAFKA_CLIENT_PASSWORDS": "${ env `{{ . }}_contract_kafka_pass` }"
             "KAFKA_CLIENT_USER": "{{ . }}_contract"
       - type: kv
-        path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-infrastructure-be"
-        data:
-          data:
-            "kafka.sasl.enabled": true
-            "kafka.sasl.password": "${ env `{{ . }}_infrabe_kafka_pass` }"
-            "kafka.sasl.username": "{{ . }}_infrabe"
-            "spring.datasource.password": "${ env `{{ . }}_infrabe` }"
-            "spring.datasource.username": "{{ . }}_infrabe"
-            "spring.mail.password": "pass"
-            "spring.mail.username": "user"
-      - type: kv
         path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-postgres-passwords"
         data:
           data:
