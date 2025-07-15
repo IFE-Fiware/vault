@@ -1,5 +1,10 @@
 ## 1.2.0 (2025-07-15)
 
+No changes.
+
+
+## 1.2.0 (2025-07-15)
+
 Update Vault version.
 Add resource definition.
 Add secret for edc-connector-adapter.
