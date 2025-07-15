@@ -1,3 +1,10 @@
+## 1.2.0 (2025-07-15)
+
+Update Vault version.
+Add resource definition.
+Add secret for edc-connector-adapter.
+Limit keywords for role.
+
 ## 1.1.3 (2025-06-05)
 
 Removed the infrastructure-be secret from automation.

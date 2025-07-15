@@ -5,7 +5,7 @@ namespaceTag: common
 
 image:
   repository: hashicorp/vault
-  tag: 1.19.0
+  tag: 1.20.0
 
 replicasCount: 3
 
@@ -24,3 +24,11 @@ domainSuffix: int.simpl-europe.eu
 
 mailpit:
   enabled: true
+
+resources:
+  requests:
+    cpu: 400m
+    memory: 400Mi
+  limits:
+    cpu: 500m
+    memory: 500Mi

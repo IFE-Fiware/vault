@@ -37,8 +37,9 @@ Mentionable values:
 | hashicorp.service             | http://vaultservice.vaultns.svc.cluster.local:8200 | link to vault service
 | hashicorp.role                | accessrole_name | name of role for vault access |
 | hashicorp.secretEngine        | name | secret engine name in vault |
-| domainSuffix                  | int.simpl-europe.eu | domain suffix
+| domainSuffix                  | int.simpl-europe.eu | domain suffix |
 | mailpit                       | true | should secret for mailpit be created |
+| resources                     | - | resources for vault replicas - standard syntax of requests and limits |
 
 Example of agentList:
 
