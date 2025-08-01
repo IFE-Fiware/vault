@@ -1,5 +1,10 @@
 ## 1.3.0 (2025-08-01)
 
+No changes.
+
+
+## 1.3.0 (2025-08-01)
+
 Changes related to moving Redis back to agents.
 
 ## 1.2.1 (2025-07-15)
