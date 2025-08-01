@@ -30,7 +30,7 @@ Mentionable values:
 | cluster.namespace             | common      | namespace of deployment  |
 | namespaceTag                  | common      | namespaceTag (part of fqdn) |
 | image.repository              | hashicorp/vault     | image repo  |
-| image.tag                     | 1.19.0 | image tag |
+| image.tag                     | 1.20.0 | image tag |
 | replicasCount                 | 3 | enables autocreation of topics |
 | agentList                     | below the table | list of agents for which secrets should be created |
 | kafkaCredentials              | user: password | additional accounts that should be created for kafka |
