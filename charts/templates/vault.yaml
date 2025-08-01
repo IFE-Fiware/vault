@@ -273,6 +273,12 @@ spec:
       {{- end }}
       {{- range .Values.agentList.authorities }}
       - type: kv
+        path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-redis"
+        data:
+          data:
+            rediscommander: {{ include "rediscommander.password" $ }}
+            redis: {{ include "redis.password" $ }}
+      - type: kv
         path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-xsfc-service"
         data:
           data:
@@ -319,6 +325,12 @@ spec:
       {{- end }}
       {{- range .Values.agentList.providers }}
       - type: kv
+        path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-redis"
+        data:
+          data:
+            rediscommander: {{ include "rediscommander.password" $ }}
+            redis: {{ include "redis.password" $ }}
+      - type: kv
         path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-contract"
         data:
           data:
@@ -349,6 +361,12 @@ spec:
             "gitops_test": "${ env `{{ . }}_gitea` }"
       {{- end }}
       {{- range .Values.agentList.consumers }}
+      - type: kv
+        path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-redis"
+        data:
+          data:
+            rediscommander: {{ include "rediscommander.password" $ }}
+            redis: {{ include "redis.password" $ }}
       - type: kv
         path: "{{ $.Values.hashicorp.secretEngine }}/data/{{ . }}-contract"
         data:
@@ -415,16 +433,6 @@ spec:
         secretKeyRef:
           name: "kafka-users-secret"
           key: notification
-    - name: "redis_pass"
-      valueFrom:
-        secretKeyRef:
-          name: "redis-secrets"
-          key: redis
-    - name: "rediscommander_pass"
-      valueFrom:
-        secretKeyRef:
-          name: "redis-secrets"
-          key: commander
     - name: "mailpit_pass"
       valueFrom:
         secretKeyRef:
