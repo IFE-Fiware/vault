@@ -153,8 +153,13 @@ spec:
   # See https://www.vaultproject.io/docs/configuration/ for more information.
   config:
     storage:
+      {{- if eq (.Values.replicaCount | int) 1 }}
+      file:
+        path: "/vault/file"
+      {{- else }}
       raft:
         path: "/vault/file"
+      {{- end }}
     listener:
       tcp:
         address: "0.0.0.0:8200"
