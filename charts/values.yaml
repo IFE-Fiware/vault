@@ -7,7 +7,7 @@ image:
   repository: hashicorp/vault
   tag: 1.20.2
 
-replicasCount: 3
+replicasCount: 1
 
 agentList: {}
 
