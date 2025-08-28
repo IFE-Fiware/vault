@@ -165,8 +165,12 @@ spec:
         address: "0.0.0.0:8200"
         tls_cert_file: /vault/tls/server.crt
         tls_key_file: /vault/tls/server.key
+    {{- if eq (.Values.replicasCount | int) 1 }}
     api_addr: https://vault.{{ .Release.Namespace }}:8200
     cluster_addr: "http://${.Env.POD_NAME}:8201"
+    {{- else }}
+    disable_clustering: true
+    {{- end }}
     ui: true
     disable_mlock: false
 
